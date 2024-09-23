@@ -10,17 +10,13 @@ class GqlApi {
   GqlApi({required this.graphQLConfig});
 
   Future<List<Country>> fetchCountries() async {
+    final GraphQLClient client = await graphQLConfig.clientToQuery();
     final QueryOptions options = QueryOptions(
       document: gql(GraphQLQuery.countries),
     );
 
     try {
-      final QueryResult result =
-          await graphQLConfig.clientToQuery().query(options);
-
-      if (result.hasException) {
-        throw Exception('GraphQL error: ${result.exception.toString()}');
-      }
+      final QueryResult result = await client.query(options);
 
       final List<dynamic>? data = result.data?['countries'];
       if (data == null || data.isEmpty) {
@@ -41,19 +37,18 @@ class GqlApi {
     required String code,
   }) async {
     final QueryOptions options = QueryOptions(
-      document: gql(GraphQLQuery.countryByCode),
+      document: gql(
+        GraphQLQuery.countryByCode,
+      ),
       variables: {
         'code': code,
       },
     );
 
     try {
-      final QueryResult result =
-          await graphQLConfig.clientToQuery().query(options);
+      final GraphQLClient client = await graphQLConfig.clientToQuery();
 
-      if (result.hasException) {
-        throw Exception('GraphQL error: ${result.exception.toString()}');
-      }
+      final QueryResult result = await client.query(options);
 
       final Map<String, dynamic>? data = result.data?['country'];
       if (data == null) {
