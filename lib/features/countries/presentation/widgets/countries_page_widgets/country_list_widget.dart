@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/app_paddings.dart';
-import '../../../../core/extentions/extentions.dart';
-import '../../../../core/widgets/horizontal_divider_widget.dart';
-import '../../../../core/widgets/horizontal_gap_widget.dart';
-import '../../../../routes/routes_paths.dart';
-import '../bloc/country_bloc.dart';
+import '../../../../../core/constants/app_paddings.dart';
+import '../../../../../core/extentions/extentions.dart';
+import '../../../../../core/widgets/horizontal_divider_widget.dart';
+import '../../../../../core/widgets/horizontal_gap_widget.dart';
+import '../../../../../routes/routes_paths.dart';
+import '../../bloc/countries_bloc/countries_bloc.dart';
 
 class CountryListWidget extends StatelessWidget {
   const CountryListWidget({
@@ -21,7 +21,7 @@ class CountryListWidget extends StatelessWidget {
       padding: EdgeInsets.all(
         AppPaddings.p16.r,
       ),
-      child: BlocBuilder<CountryBloc, CountryState>(
+      child: BlocBuilder<CountriesBloc, CountriesState>(
         buildWhen: (previous, current) =>
             previous.countries != current.countries,
         builder: (context, state) {
@@ -31,13 +31,10 @@ class CountryListWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  final countryBloc = context.read<CountryBloc>();
-
                   final String countryCode = state.countries[index].code!;
 
                   context.pushNamed(
                     RoutesPaths.country,
-                    extra: countryBloc,
                     queryParameters: {
                       'code': countryCode,
                     },

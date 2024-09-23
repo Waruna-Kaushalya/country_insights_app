@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/widgets/shimmer_text.dart';
-import '../bloc/country_bloc.dart';
+import '../../../../../core/widgets/shimmer_text.dart';
+import '../../bloc/country_bloc/country_bloc.dart';
+import 'country_data_widget.dart';
 
 class CountryPageBodyWidget extends StatelessWidget {
   const CountryPageBodyWidget({super.key});
@@ -13,6 +14,7 @@ class CountryPageBodyWidget extends StatelessWidget {
       appBar: AppBar(
         leading: const BackButton(),
         title: BlocBuilder<CountryBloc, CountryState>(
+          buildWhen: (previous, current) => previous.country != current.country,
           builder: (context, state) {
             if (state.countryFetchByCodeStateStatus.isSuccess) {
               return Text(state.country.name!);
@@ -24,7 +26,7 @@ class CountryPageBodyWidget extends StatelessWidget {
           },
         ),
       ),
-      body: Container(),
+      body: const CountryDataWidget(),
     );
   }
 }
