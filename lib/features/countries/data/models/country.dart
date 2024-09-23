@@ -1,6 +1,6 @@
-import 'package:meta/meta.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
+
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'country.freezed.dart';
 part 'country.g.dart';
@@ -23,15 +23,30 @@ class Countries with _$Countries {
 class Country with _$Country {
   const factory Country({
     @JsonKey(name: "code") required String? code,
+    @JsonKey(name: "capital") required String? capital,
     @JsonKey(name: "currency") required String? currency,
     @JsonKey(name: "emoji") required String? emoji,
     @JsonKey(name: "name") required String? name,
     @JsonKey(name: "continent") required Continent? continent,
     @JsonKey(name: "languages") required List<Language>? languages,
+    @JsonKey(name: "native") required String? native,
+    @JsonKey(name: "phone") required String? phone,
   }) = _Country;
 
   factory Country.fromJson(Map<String, dynamic> json) =>
       _$CountryFromJson(json);
+
+  factory Country.empty() => const Country(
+        code: "",
+        capital: "",
+        currency: "",
+        emoji: "",
+        name: "",
+        continent: null,
+        languages: [],
+        native: "",
+        phone: "",
+      );
 }
 
 @freezed

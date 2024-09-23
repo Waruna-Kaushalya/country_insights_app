@@ -27,7 +27,6 @@ class GqlApi {
         throw Exception('No data found for countries');
       }
 
-      // Convert List<dynamic> to List<Country> using Freezed's fromJson
       final List<Country> countries = data
           .map((country) => Country.fromJson(country as Map<String, dynamic>))
           .toList();
@@ -35,6 +34,37 @@ class GqlApi {
       return countries;
     } catch (e) {
       throw Exception('Failed to fetch countries: $e');
+    }
+  }
+
+  Future<Country> fetchCountryByCode({
+    required String code,
+  }) async {
+    final QueryOptions options = QueryOptions(
+      document: gql(GraphQLQuery.countryByCode),
+      variables: {
+        'code': code,
+      },
+    );
+
+    try {
+      final QueryResult result =
+          await graphQLConfig.clientToQuery().query(options);
+
+      if (result.hasException) {
+        throw Exception('GraphQL error: ${result.exception.toString()}');
+      }
+
+      final Map<String, dynamic>? data = result.data?['country'];
+      if (data == null) {
+        throw Exception('No data found for country with code $code');
+      }
+
+      final Country country = Country.fromJson(data);
+
+      return country;
+    } catch (e) {
+      throw Exception('Failed to fetch country by code: $e');
     }
   }
 }

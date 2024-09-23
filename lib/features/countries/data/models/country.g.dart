@@ -21,6 +21,7 @@ Map<String, dynamic> _$$CountriesImplToJson(_$CountriesImpl instance) =>
 _$CountryImpl _$$CountryImplFromJson(Map<String, dynamic> json) =>
     _$CountryImpl(
       code: json['code'] as String?,
+      capital: json['capital'] as String?,
       currency: json['currency'] as String?,
       emoji: json['emoji'] as String?,
       name: json['name'] as String?,
@@ -30,16 +31,21 @@ _$CountryImpl _$$CountryImplFromJson(Map<String, dynamic> json) =>
       languages: (json['languages'] as List<dynamic>?)
           ?.map((e) => Language.fromJson(e as Map<String, dynamic>))
           .toList(),
+      native: json['native'] as String?,
+      phone: json['phone'] as String?,
     );
 
 Map<String, dynamic> _$$CountryImplToJson(_$CountryImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
+      'capital': instance.capital,
       'currency': instance.currency,
       'emoji': instance.emoji,
       'name': instance.name,
       'continent': instance.continent,
       'languages': instance.languages,
+      'native': instance.native,
+      'phone': instance.phone,
     };
 
 _$ContinentImpl _$$ContinentImplFromJson(Map<String, dynamic> json) =>

@@ -184,6 +184,8 @@ Country _$CountryFromJson(Map<String, dynamic> json) {
 mixin _$Country {
   @JsonKey(name: "code")
   String? get code => throw _privateConstructorUsedError;
+  @JsonKey(name: "capital")
+  String? get capital => throw _privateConstructorUsedError;
   @JsonKey(name: "currency")
   String? get currency => throw _privateConstructorUsedError;
   @JsonKey(name: "emoji")
@@ -194,6 +196,10 @@ mixin _$Country {
   Continent? get continent => throw _privateConstructorUsedError;
   @JsonKey(name: "languages")
   List<Language>? get languages => throw _privateConstructorUsedError;
+  @JsonKey(name: "native")
+  String? get native => throw _privateConstructorUsedError;
+  @JsonKey(name: "phone")
+  String? get phone => throw _privateConstructorUsedError;
 
   /// Serializes this Country to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -211,11 +217,14 @@ abstract class $CountryCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "code") String? code,
+      @JsonKey(name: "capital") String? capital,
       @JsonKey(name: "currency") String? currency,
       @JsonKey(name: "emoji") String? emoji,
       @JsonKey(name: "name") String? name,
       @JsonKey(name: "continent") Continent? continent,
-      @JsonKey(name: "languages") List<Language>? languages});
+      @JsonKey(name: "languages") List<Language>? languages,
+      @JsonKey(name: "native") String? native,
+      @JsonKey(name: "phone") String? phone});
 
   $ContinentCopyWith<$Res>? get continent;
 }
@@ -236,16 +245,23 @@ class _$CountryCopyWithImpl<$Res, $Val extends Country>
   @override
   $Res call({
     Object? code = freezed,
+    Object? capital = freezed,
     Object? currency = freezed,
     Object? emoji = freezed,
     Object? name = freezed,
     Object? continent = freezed,
     Object? languages = freezed,
+    Object? native = freezed,
+    Object? phone = freezed,
   }) {
     return _then(_value.copyWith(
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      capital: freezed == capital
+          ? _value.capital
+          : capital // ignore: cast_nullable_to_non_nullable
               as String?,
       currency: freezed == currency
           ? _value.currency
@@ -267,6 +283,14 @@ class _$CountryCopyWithImpl<$Res, $Val extends Country>
           ? _value.languages
           : languages // ignore: cast_nullable_to_non_nullable
               as List<Language>?,
+      native: freezed == native
+          ? _value.native
+          : native // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -294,11 +318,14 @@ abstract class _$$CountryImplCopyWith<$Res> implements $CountryCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "code") String? code,
+      @JsonKey(name: "capital") String? capital,
       @JsonKey(name: "currency") String? currency,
       @JsonKey(name: "emoji") String? emoji,
       @JsonKey(name: "name") String? name,
       @JsonKey(name: "continent") Continent? continent,
-      @JsonKey(name: "languages") List<Language>? languages});
+      @JsonKey(name: "languages") List<Language>? languages,
+      @JsonKey(name: "native") String? native,
+      @JsonKey(name: "phone") String? phone});
 
   @override
   $ContinentCopyWith<$Res>? get continent;
@@ -318,16 +345,23 @@ class __$$CountryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? code = freezed,
+    Object? capital = freezed,
     Object? currency = freezed,
     Object? emoji = freezed,
     Object? name = freezed,
     Object? continent = freezed,
     Object? languages = freezed,
+    Object? native = freezed,
+    Object? phone = freezed,
   }) {
     return _then(_$CountryImpl(
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      capital: freezed == capital
+          ? _value.capital
+          : capital // ignore: cast_nullable_to_non_nullable
               as String?,
       currency: freezed == currency
           ? _value.currency
@@ -349,6 +383,14 @@ class __$$CountryImplCopyWithImpl<$Res>
           ? _value._languages
           : languages // ignore: cast_nullable_to_non_nullable
               as List<Language>?,
+      native: freezed == native
+          ? _value.native
+          : native // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -358,11 +400,14 @@ class __$$CountryImplCopyWithImpl<$Res>
 class _$CountryImpl implements _Country {
   const _$CountryImpl(
       {@JsonKey(name: "code") required this.code,
+      @JsonKey(name: "capital") required this.capital,
       @JsonKey(name: "currency") required this.currency,
       @JsonKey(name: "emoji") required this.emoji,
       @JsonKey(name: "name") required this.name,
       @JsonKey(name: "continent") required this.continent,
-      @JsonKey(name: "languages") required final List<Language>? languages})
+      @JsonKey(name: "languages") required final List<Language>? languages,
+      @JsonKey(name: "native") required this.native,
+      @JsonKey(name: "phone") required this.phone})
       : _languages = languages;
 
   factory _$CountryImpl.fromJson(Map<String, dynamic> json) =>
@@ -371,6 +416,9 @@ class _$CountryImpl implements _Country {
   @override
   @JsonKey(name: "code")
   final String? code;
+  @override
+  @JsonKey(name: "capital")
+  final String? capital;
   @override
   @JsonKey(name: "currency")
   final String? currency;
@@ -395,8 +443,15 @@ class _$CountryImpl implements _Country {
   }
 
   @override
+  @JsonKey(name: "native")
+  final String? native;
+  @override
+  @JsonKey(name: "phone")
+  final String? phone;
+
+  @override
   String toString() {
-    return 'Country(code: $code, currency: $currency, emoji: $emoji, name: $name, continent: $continent, languages: $languages)';
+    return 'Country(code: $code, capital: $capital, currency: $currency, emoji: $emoji, name: $name, continent: $continent, languages: $languages, native: $native, phone: $phone)';
   }
 
   @override
@@ -405,6 +460,7 @@ class _$CountryImpl implements _Country {
         (other.runtimeType == runtimeType &&
             other is _$CountryImpl &&
             (identical(other.code, code) || other.code == code) &&
+            (identical(other.capital, capital) || other.capital == capital) &&
             (identical(other.currency, currency) ||
                 other.currency == currency) &&
             (identical(other.emoji, emoji) || other.emoji == emoji) &&
@@ -412,13 +468,24 @@ class _$CountryImpl implements _Country {
             (identical(other.continent, continent) ||
                 other.continent == continent) &&
             const DeepCollectionEquality()
-                .equals(other._languages, _languages));
+                .equals(other._languages, _languages) &&
+            (identical(other.native, native) || other.native == native) &&
+            (identical(other.phone, phone) || other.phone == phone));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, code, currency, emoji, name,
-      continent, const DeepCollectionEquality().hash(_languages));
+  int get hashCode => Object.hash(
+      runtimeType,
+      code,
+      capital,
+      currency,
+      emoji,
+      name,
+      continent,
+      const DeepCollectionEquality().hash(_languages),
+      native,
+      phone);
 
   /// Create a copy of Country
   /// with the given fields replaced by the non-null parameter values.
@@ -439,18 +506,23 @@ class _$CountryImpl implements _Country {
 abstract class _Country implements Country {
   const factory _Country(
       {@JsonKey(name: "code") required final String? code,
+      @JsonKey(name: "capital") required final String? capital,
       @JsonKey(name: "currency") required final String? currency,
       @JsonKey(name: "emoji") required final String? emoji,
       @JsonKey(name: "name") required final String? name,
       @JsonKey(name: "continent") required final Continent? continent,
-      @JsonKey(name: "languages")
-      required final List<Language>? languages}) = _$CountryImpl;
+      @JsonKey(name: "languages") required final List<Language>? languages,
+      @JsonKey(name: "native") required final String? native,
+      @JsonKey(name: "phone") required final String? phone}) = _$CountryImpl;
 
   factory _Country.fromJson(Map<String, dynamic> json) = _$CountryImpl.fromJson;
 
   @override
   @JsonKey(name: "code")
   String? get code;
+  @override
+  @JsonKey(name: "capital")
+  String? get capital;
   @override
   @JsonKey(name: "currency")
   String? get currency;
@@ -466,6 +538,12 @@ abstract class _Country implements Country {
   @override
   @JsonKey(name: "languages")
   List<Language>? get languages;
+  @override
+  @JsonKey(name: "native")
+  String? get native;
+  @override
+  @JsonKey(name: "phone")
+  String? get phone;
 
   /// Create a copy of Country
   /// with the given fields replaced by the non-null parameter values.
