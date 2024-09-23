@@ -19,7 +19,7 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Mock Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

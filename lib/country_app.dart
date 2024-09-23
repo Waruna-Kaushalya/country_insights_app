@@ -38,6 +38,7 @@ class _CountryAppState extends State<CountryApp> {
           themeMode: ThemeMode.light,
           builder: (context, child) {
             return BlocListener<AuthBloc, AuthState>(
+              
               listener: (context, state) async {
                 if (state.authState.isAuthenticated) {
                   return Routes.router.go(RoutesPaths.countries);
