@@ -1,16 +1,19 @@
 part of 'auth_bloc.dart';
 
 enum AuthStateStateStatus {
-  initial,
+  unknown,
   loading,
-  success,
+  authenticated,
+  unauthenticated,
   failure;
 
-  bool get isInitial => this == AuthStateStateStatus.initial;
+  bool get isUnknown => this == AuthStateStateStatus.unknown;
 
   bool get isLoading => this == AuthStateStateStatus.loading;
 
-  bool get isSuccess => this == AuthStateStateStatus.success;
+  bool get isAuthenticated => this == AuthStateStateStatus.authenticated;
+
+  bool get isUnauthenticated => this == AuthStateStateStatus.unauthenticated;
 
   bool get isFailure => this == AuthStateStateStatus.failure;
 }
@@ -24,6 +27,24 @@ class AuthState {
   });
 
   static AuthState initial() => const AuthState(
-        authState: AuthStateStateStatus.initial,
+        authState: AuthStateStateStatus.unknown,
       );
+
+  AuthState copyWith({
+    AuthStateStateStatus? authState,
+  }) {
+    return AuthState(
+      authState: authState ?? this.authState,
+    );
+  }
+
+  @override
+  bool operator ==(covariant AuthState other) {
+    if (identical(this, other)) return true;
+
+    return other.authState == authState;
+  }
+
+  @override
+  int get hashCode => authState.hashCode;
 }

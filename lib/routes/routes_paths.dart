@@ -1,6 +1,7 @@
 abstract class RoutesPaths {
   RoutesPaths._();
 
-  static String countries = '/';
+  static String auth = '/';
+  static String countries = '/countries';
   static String country = 'country';
 }
