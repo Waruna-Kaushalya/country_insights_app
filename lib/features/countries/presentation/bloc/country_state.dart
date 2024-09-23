@@ -1,43 +1,69 @@
 part of 'country_bloc.dart';
 
-enum CountryDataFetchStateStatus {
+enum CountriesFetchStateStatus {
   initial,
   loading,
   success,
   failure;
 
-  bool get isInitial => this == CountryDataFetchStateStatus.initial;
+  bool get isInitial => this == CountriesFetchStateStatus.initial;
 
-  bool get isLoading => this == CountryDataFetchStateStatus.loading;
+  bool get isLoading => this == CountriesFetchStateStatus.loading;
 
-  bool get isSuccess => this == CountryDataFetchStateStatus.success;
+  bool get isSuccess => this == CountriesFetchStateStatus.success;
 
-  bool get isFailure => this == CountryDataFetchStateStatus.failure;
+  bool get isFailure => this == CountriesFetchStateStatus.failure;
+}
+
+enum CountryFetchByCodeStateStatus {
+  initial,
+  loading,
+  success,
+  failure;
+
+  bool get isInitial => this == CountryFetchByCodeStateStatus.initial;
+
+  bool get isLoading => this == CountryFetchByCodeStateStatus.loading;
+
+  bool get isSuccess => this == CountryFetchByCodeStateStatus.success;
+
+  bool get isFailure => this == CountryFetchByCodeStateStatus.failure;
 }
 
 @immutable
 class CountryState {
-  final CountryDataFetchStateStatus countryDataFetchStateStatus;
+  final CountriesFetchStateStatus countryDataFetchStateStatus;
+  final CountryFetchByCodeStateStatus countryFetchByCodeStateStatus;
   final List<Country> countries;
+  final Country country;
 
   const CountryState({
     required this.countryDataFetchStateStatus,
+    required this.countryFetchByCodeStateStatus,
     required this.countries,
+    required this.country,
   });
 
-  static CountryState initial() => const CountryState(
-        countryDataFetchStateStatus: CountryDataFetchStateStatus.initial,
-        countries: [],
+  static CountryState initial() => CountryState(
+        countryDataFetchStateStatus: CountriesFetchStateStatus.initial,
+        countryFetchByCodeStateStatus: CountryFetchByCodeStateStatus.initial,
+        countries: const [],
+        country: Country.empty(),
       );
 
   CountryState copyWith({
-    CountryDataFetchStateStatus? countryDataFetchStateStatus,
+    CountriesFetchStateStatus? countryDataFetchStateStatus,
+    CountryFetchByCodeStateStatus? countryFetchByCodeStateStatus,
     List<Country>? countries,
+    Country? country,
   }) {
     return CountryState(
       countryDataFetchStateStatus:
           countryDataFetchStateStatus ?? this.countryDataFetchStateStatus,
+      countryFetchByCodeStateStatus:
+          countryFetchByCodeStateStatus ?? this.countryFetchByCodeStateStatus,
       countries: countries ?? this.countries,
+      country: country ?? this.country,
     );
   }
 
@@ -46,9 +72,16 @@ class CountryState {
     if (identical(this, other)) return true;
 
     return other.countryDataFetchStateStatus == countryDataFetchStateStatus &&
-        listEquals(other.countries, countries);
+        other.countryFetchByCodeStateStatus == countryFetchByCodeStateStatus &&
+        listEquals(other.countries, countries) &&
+        other.country == country;
   }
 
   @override
-  int get hashCode => countryDataFetchStateStatus.hashCode ^ countries.hashCode;
+  int get hashCode {
+    return countryDataFetchStateStatus.hashCode ^
+        countryFetchByCodeStateStatus.hashCode ^
+        countries.hashCode ^
+        country.hashCode;
+  }
 }
